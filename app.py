@@ -1,4 +1,3 @@
-
 import streamlit as st
 import sqlite3
 import pandas as pd
@@ -27,6 +26,9 @@ users = {
     "Aziz": "Aziz#123",
     "SNM": "SNM#123"
 }
+
+# إعداد صفحة ستريمليت
+st.set_page_config(page_title="تطبيق المحفظة الاستثمارية", layout="wide")
 
 # واجهة تسجيل الدخول
 st.sidebar.title("🔐 تسجيل الدخول")
@@ -61,7 +63,7 @@ if password == users[username]:
 
     elif page == "📊 عرض العمليات":
         st.header("📋 العمليات السابقة")
-        df = pd.read_sql_query(f"SELECT * FROM transactions WHERE username = ?", conn, params=(username,))
+        df = pd.read_sql_query("SELECT * FROM transactions WHERE username = ?", conn, params=(username,))
         if not df.empty:
             df.index += 1
             st.dataframe(df)
